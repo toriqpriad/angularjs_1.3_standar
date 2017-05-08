@@ -1,0 +1,96 @@
+<br><br>
+<div class="row" ng-if="pageAction == 'view'">
+    <div class="col-md-8" >       
+        <div class="panel" >
+
+            <div class="panel-body">
+                <h4><strong>{{contentEdit.judul}}</strong></h4>
+                <hr>
+                <img class="img-responsive " ng-src="{{contentEdit.gambar_url}}" style="float: left; margin-right: 15px; width: 40%; height:200px;">  
+                <div style="text-align: justify;text-justify: inter-word;">{{contentEdit.deskripsi_pendek}}
+                    Berikut adab bertata krama :    
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="col-md-4">        
+        <div class="list-group" >
+            <blockquote>Lihat juga : </blockquote>            
+            <a href="#" class="list-group-item " ng-repeat = "each in content" >{{each.judul}}</a>            
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-if="pageAction == 'edit'">
+    <div class="col-md-12" >       
+        <div class="panel" >
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label" for="focusedInput"><strong>Judul</strong></label>
+                    <input class="form-control" id="focusedInput" type="text"  ng-model="contentEdit.judul">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="focusedInput"><strong>Deskripsi Singkat</strong></label>
+                    <textarea class="form-control" style="height:200px; resize:none;" ng-model="contentEdit.deskripsi_pendek">{{contentEdit.deskripsi_pendek}}</textarea>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="focusedInput"><strong>Video URL</strong></label>
+                    <input class="form-control" id="focusedInput" type="text" value="{{contentEdit.video_url}}" placeholder="Video URL">
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label class="control-label" for="focusedInput"><strong>Gambar Depan</strong></label>
+                </div>
+                <div class="form-group">
+                    <img ng-src="{{contentEdit.gambar_url}}" class="img-responsive img-thumbnail" >                                        
+                </div>
+                <div class="form-group">
+                    <input type="file" class="btn btn-default "  ngf-select="" ng-click="setImage()" ng-model="contentEdit.imgFront">
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6><label class="control-label" for="focusedInput"><strong>Item Tata Krama</strong></label></h6>
+                    </div>
+                    <div class="col-md-4">
+                        <button ng-click="addItem()" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp;Tambah Item</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">                        
+                        <!--{{itemData}}-->
+                        <div ng-repeat="item in itemData">
+                            <div class="form-group well">
+                                <label class="control-label" for="focusedInput"><strong>Tata Krama Nomor {{item.sort_number}}</strong></label>                            
+                                <input type="hidden" ng-model="item.sort_number"><input type="hidden" ng-model="item.kategori_seq"><input type="hidden" ng-model="item.seq">
+                                <input class="form-control" id="focusedInput" type="text" placeholder="Aturan tata krama nomor {{item.sort_number}}" ng-model="item.item">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="item.addkettambah" ng-checked="item.detail_item != ''"  ng-click="checkDetailItem(item.detail_item, item.sort_number)" id="checkbox_{{item.sort_number}}"> Keterangan Tambahan
+                                        <!--<input type="checkbox" ng-model="item.addkettambah" ng-checked="checkDetailItem(item.detail_item)"> Keterangan Tambahan-->
+                                    </label>
+                                </div>
+                                <textarea class="form-control"  style="height:100px; resize:none;" ng-model="item.detail_item" id="detailKeterangan_{{item.sort_number}}"></textarea>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-danger pull-right" ng-click="removeItem()"><i class="fa fa-trash-o"></i>&nbsp;Hapus</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="col-md-12">
+                        <button class="btn btn-primary pull-left" ng-click="submitEditData()"><i class="fa fa-floppy-o"></i>&nbsp;Simpan</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>        
+    </div>    
+</div>

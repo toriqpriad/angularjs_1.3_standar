@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-6">
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">Search : </div>
+          <input type="text" class="form-control" ng-model="search" placeholder="Name Search">
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="col-md-6">
+    <button class="btn  btn-default pull-right" ng-click="addModal()">Add Data</button>
+  </div>
+</div>
+
+<br><br>
+
+<div class="panel panel-default">
+  <table class="table table-bordered panel-body">
+    <thead>
+      <tr class="success">
+        <th width="10">ID</th>
+        <th>Name</th>
+        <th>Total</th>
+        <th width="150">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in content| filter : search">
+        <td>{{ item.id}}</td>
+        <td>{{ item.name}}</td>
+        <td>{{ item.total}} {{item.satuan}}</td>
+        <td><button ng-click="editModal(item.id)" class="btn btn-warning btn-xs">Ubah</button>&nbsp; <button ng-click="deleteModal(item.id)"
+            class="btn  btn-xs btn-danger">Hapus</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!--MODAL ADD DATA -->
+<script type="text/ng-template" id="button-add-modal.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Add Data</h4>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+    <div class="form-group"><input class="form-control" type="text" id="inputSmall" ng-model="input.name" placeholder="Name"></div>
+    <div class="form-group"><input class="form-control" type="text" id="inputSmall" ng-model="input.total" placeholder="Total"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="save(input)">Save</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="button-edit-modal.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Edit Data</h4>
+  </div>
+  <div class="modal-body" id="modal-body">    
+    <div class="form-group"><input class="form-control" type="text" id="inputSmall" ng-model="detail.name" placeholder="Name"></div>
+    <div class="form-group"><input class="form-control" type="text" id="inputSmall" ng-model="detail.total" placeholder="Total"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="edit(detail)">Save</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="button-delete-modal.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Delete Data</h4>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+    Are you sure to delete this data ?
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="delete()">Yes</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
